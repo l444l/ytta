@@ -1,1 +1,13 @@
-https://limewire.com/d/f44be6b7-194d-448d-b8fd-5ecb41a88148#V3ozt2-UJmkfh-GgYwVLEHFs6HlnMU1ttQAh7pEBbZY
+Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+    If txtId.Text <> "" Then
+        Dim result As DialogResult = MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+        If result = DialogResult.Yes Then
+            Dim query As String = "DELETE FROM Guru WHERE id_guru = @id"
+            ExecuteQuery(query, New SqlParameter("@id", txtId.Text))
+            LoadData()
+            MsgBox("Data berhasil dihapus.", MsgBoxStyle.Information, "Info")
+        End If
+    Else
+        MsgBox("Masukkan ID guru yang ingin dihapus!", MsgBoxStyle.Exclamation, "Info")
+    End If
+End Sub
